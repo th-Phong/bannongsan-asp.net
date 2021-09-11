@@ -1,0 +1,280 @@
+﻿@model  IEnumerable<NongSan.Models.SanPham>
+@{
+    ViewBag.Title = "Shop";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var alldanhmuc = (List<NongSan.Models.DanhMucSanPham>)ViewBag.ListDanhMuc;
+    var totalpage = ViewBag.Count;
+    //var allproduct = (List<NongSan.Models.SanPham>)ViewBag.ListAllSanPham;
+}
+
+<div class="organic_food_wrapper">
+    <!--- shop_wrapper area  -->
+    <div class="shop_wrapper ptb-90">
+        <div class="container-fluid">
+            <div class="row">
+                <!--- sibar_wrapper area  -->
+                <div class="col-lg-3 col-md-8 col-12">
+                    <div class="shop_sidebar">
+                        <div class="block_categories">
+                            <div class="category_top_menu widget">
+                                <div class="widget_title">
+                                    <h3>categories</h3>
+                                </div>
+                                <ul class="shop_toggle">
+                                    @foreach (var item in alldanhmuc)
+                                    {
+                                        //var url = "/san-pham-danh-muc-" + item.IDDanhMuc;
+                                        <li data-danhmuc="@item.IDDanhMuc">
+                                            <a href="#">@item.TenDanhMuc</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="search_filters_wrapper">
+                            <div class="price_filter widget">
+                                <div class="widget_title">
+                                    <h3>filter By price</h3>
+                                </div>
+                                <div class="search_filters widget">
+                                    <div id="slider-range"></div>
+                                    <input type="text" name="text" id="amount" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--- sibar_wrapper area  -->
+                <div class="col-lg-9 col-md-12 col-12">
+                    <!--- short_wrapper area  -->
+                    <div class="categories_banner">
+                        <div class="categories_banner_inner">
+                            <img src="assets/img/banner/shop.jpg" alt="">
+                        </div>
+                        <h3>SHOP</h3>
+                    </div>
+                    <div class="tav_menu_wrapper">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 col-md-7 col-sm-6">
+                                <div class="tab_menu shop_menu">
+                                    <div class="tab_menu_inner">
+                                        <ul class="nav" role="tablist">
+                                            <li><a class="active" data-toggle="tab" href="#shop_active" role="tab" aria-controls="shop_active" aria-selected="true"><i class="fa fa-th" aria-hidden="true"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab_menu_right">
+                                        <p>There are @Model.Count() products.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-5 col-sm-6">
+                                <div class="Relevance">
+                                    <span>Sort by:</span>
+                                    <div class="dropdown dropdown-shop">
+                                        <select name="drop" id="dropdown">
+                                            <option value="1">Relevance</option>
+                                            <option value="2">Name, A to Z</option>
+                                            <option value="2">Name, Z to A</option>
+                                            <option value="2">Price, low to high</option>
+                                            <option value="2">Price, high to low</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--- short_wrapper area  -->
+                    <div id="shop_content">
+                        <div class="tab_product_wrapper">
+                            <div class="tab-content">
+                                <!--- shop grid start-->
+                                <div class="tab-pane fade show active" id="shop_active">
+                                    <div class="row">
+                                        @foreach (var item in Model)
+                                        {
+                                            var url = "/chi-tiet-san-pham-" + item.IDSanPham;
+                                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                                                <div class="single__product">
+                                                    <div class="single_product__inner">
+                                                        <span class="new_badge">Organic</span>
+                                                        <span class="discount_price">sale</span>
+                                                        <div class="product_img">
+                                                            <a href="@url">
+                                                                <img src="~/assets/img/product/@item.Hinh" alt="">
+                                                            </a>
+                                                        </div>
+                                                        <div class="product__content text-center">
+                                                            <div class="produc_desc_info">
+                                                                <div class="product_title">
+                                                                    <h4><a href="@url">@item.TenSanPham</a></h4>
+                                                                </div>
+                                                                <div class="product_price">
+                                                                    <p>@string.Format("{0:n0}", @item.GiaKhuyenMai) VND</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="product__hover">
+                                                                <ul>
+                                                                    <li><a href="#" idpro=@item.IDSanPham quantity="1" weight="500" class="addcart"><i class="ion-android-cart"></i></a></li>
+                                                                    <li><a class="cart-fore" href="#" data-toggle="modal" data-target="#my_modal" title="Quick View"><i class="ion-android-open"></i></a></li>
+
+                                                                    <li><a href="@url"><i class="ion-clipboard"></i></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--- phan trang-->
+                        <div class="shop_pagination">
+                            <div class="row align-items-center">
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div class="total_item_shop">
+                                       
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 offset-lg-2 col-md-6 col-sm-6">
+                                    <div class="page_list_clearfix text-center">
+                                        <ul>
+                                            <li class="prev"><a href="#"><i class="zmdi zmdi-chevron-left"></i> Previous</a></li>
+                                            @for (var i = 1; i <= totalpage; i++)
+                                            {
+                                                var active = string.Empty;
+                                                if (i == 1)
+                                                { active = "current_page"; }
+
+                                                <li class="page-item @active">
+                                                    <a href="#" data-page="@i">@i</a>
+                                                </li>
+
+                                            }
+                                            <li class="next"><a href="#" data-max-page="@totalpage"> Next <i class="zmdi zmdi-chevron-right"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--- shop_wrapper area end  -->
+</div>
+
+<!--organicfood wrapper end-->
+<!-- modal area start -->
+<div class="modal fade" id="my_modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-body shop">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-5 col-sm-12">
+                            <div class="product-flags madal">
+                                <div class="tab-content" id="pills-tabContent">
+                                    <div class="tab-pane fade show active" id="imgeone" role="tabpanel">
+                                        <div class="product_tab_img">
+                                            <a href="#"><img src="assets/img/cart/nav12.jpg" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="imgetwo" role="tabpanel">
+                                        <div class="product_tab_img">
+                                            <a href="#"><img src="assets/img/cart/nav11.jpg" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="imgethree" role="tabpanel">
+                                        <div class="product_tab_img">
+                                            <a href="#"><img src="assets/img/cart/nav13.jpg" alt=""></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="products_tab_button  modals">
+                                    <ul class="nav product_navactive" role="tablist">
+                                        <li>
+                                            <a class="nav-link active" data-toggle="tab" href="#imgeone" role="tab" aria-controls="imgeone" aria-selected="false"><img src="assets/img/cart/nav.jpg" alt=""></a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link" data-toggle="tab" href="#imgetwo" role="tab" aria-controls="imgetwo" aria-selected="false"><img src="assets/img/cart/nav1.jpg" alt=""></a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link button_three" data-toggle="tab" href="#imgethree" role="tab" aria-controls="imgethree" aria-selected="false"><img src="assets/img/cart/nav2.jpg" alt=""></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-12">
+                            <div class="modal_right">
+                                <div class="shop_reviews">
+                                    <div class="demo_product">
+                                        <h2>Sprite Yoga Straps1</h2>
+                                    </div>
+                                    <div class="current_price">
+                                        <span class="regular">$64.99</span>
+                                        <span class="regular_price">$78.99</span>
+                                    </div>
+                                    <div class="product_information product_modal">
+                                        <div id="product_modal_content">
+                                            <p>Short-sleeved blouse with feminine draped sleeve detail.</p>
+                                        </div>
+                                        <div class="product_variants">
+                                            <div class="product_variants_item modal_item">
+                                                <span class="control_label">Size</span>
+                                                <select id="group_1">
+                                                    <option value="1">S</option>
+                                                    <option value="2" selected="selected">M</option>
+                                                    <option value="3">L</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="quickview_plus_minus">
+                                                <span class="control_label">Quantity</span>
+                                                <div class="quickview_plus_minus_inner">
+                                                    <div class="cart-plus-minus">
+                                                        <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
+                                                    </div>
+                                                    <div class="add_button add_modal">
+                                                        <button type="submit"> Add to cart</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="cart_description">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="social-share">
+                                <h3>Share this product</h3>
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal area end --> 

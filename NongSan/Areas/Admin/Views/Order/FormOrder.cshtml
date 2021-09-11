@@ -1,0 +1,123 @@
+﻿@model IEnumerable<NongSan.Models.DonHang>
+@{
+    ViewBag.Title = "FormOrder";
+}
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Đơn Hàng</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <form>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="IDDonHang">Mã Đơn Hàng</label>
+                        <input type="text" class="form-control" id="IDDonHang" name="IDDonHang" placeholder="" disabled="disabled" />
+                    </div>
+                    <div class="form-group">
+                        <label for="ShipName">Tên Người Đặt</label>
+                        <input type="text" class="form-control" id="ShipTenNguoiDat" name="ShipTenNguoiDat" disabled placeholder="Tên Người Đặt" />
+                    </div>
+                    <div class="form-group">
+                        <label for="UserName">Username</label>
+                        <input type="text" class="form-control" id="UserName" name="UserName" disabled placeholder="Username" />
+                    </div>
+                    <div class="form-group">
+                        <label for="ShipSoDienThoai">Số Điện Thoại</label>
+                        <input type="text" class="form-control" id="ShipSoDienThoai" name="ShipSoDienThoai" disabled placeholder="Số Điện Thoại" />
+                    </div>
+                    <div class="form-group">
+                        <label for="ShipDiaChi">Địa chỉ Giao Hàng</label>
+                        <input type="text" class="form-control" id="ShipDiaChi" name="ShipDiaChi" disabled placeholder="Địa chỉ Giao Hàng" />
+                    </div>
+                    <div class="form-group">
+                        <label for="ShipEmail">Email</label>
+                        <input type="text" class="form-control" id="ShipEmail" name="ShipEmail" disabled placeholder="Email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="ShipGhiChu">Ghi chú</label>
+                        <textarea id="ShipGhiChu" class="form-control" name="ShipGhiChu"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="HinhThucThanhToan">Hình thức thanh toán</label>
+                        <input type="text" class="form-control" id="HinhThucThanhToan" name="HinhThucThanhToan" disabled placeholder="Hình thức thanh toán" />
+                    </div>
+                    <div class="form-group">
+                        <label for="TrangThaiDonHang">Trạng Thái Đơn hàng</label>
+                        <select class="form-control" id="TrangThaiDonHang" name="TrangThaiDonHang">
+                            <option value="Chờ xác nhận">Chờ xác nhận</option>
+                            <option value="Đang giao hàng">Đang giao hàng</option>
+                            <option value="Đã thanh toán">Đã thanh toán</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="TongTien">Tổng Tiền (VND)</label>
+                        <input type="text" class="form-control" id="TongTien" name="TongTien" disabled placeholder="Tổng tiền đơn hàng" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnUpdate_order" style="display:none;" onclick="Update();">Update</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function Update() {
+        //var res = validate();
+        //if (res == false) {
+        //    return false;
+        //}
+        var orderObj = {
+            IDDonHang: $('#IDDonHang').val(),
+            ShipTenNguoiDat: $('#ShipTenNguoiDat').val(),
+            UserName: $('#UserName').val(),
+            ShipSoDienThoai: $('#ShipSoDienThoai').val(),
+            ShipDiaChi: $('#ShipDiaChi').val(),
+            ShipEmail: $('#ShipEmail').val(),
+            ShipGhiChu: $('#ShipGhiChu').val(),
+            HinhThucThanhToan: $('#HinhThucThanhToan').val(),
+            TrangThaiDonHang: $('#TrangThaiDonHang').val(),
+            TongTien: $('#TongTien').val()
+        };
+        $.ajax({
+            url: "/Order/Update",
+            data: JSON.stringify(orderObj),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                if (response == 0) {
+                    $(".modal-bodydelete").text("Fix thành công");
+                }
+                else if (response == 1) {
+                    $(".modal-bodydelete").text("Danh mục này không tồn tại !");
+                }
+                else if (response == 2) {
+                    $(".modal-bodydelete").text("Có lỗi");
+                }
+
+                $('#modalDelete').modal('show');
+                $('#myModal').modal('hide');
+
+                //reset nội dung
+                $('#IDDonHang').val('');
+                $('#ShipTenNguoiDat').val('');
+                $('#UserName').val();
+                $('#ShipSoDienThoai').val('');
+                $('#ShipDiaChi').val('');
+                $('#ShipEmail').val('');
+                $('#ShipGhiChu').val('');
+                $('#HinhThucThanhToan').val('');
+                $('#TrangThaiDonHang').val('');
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+</script>

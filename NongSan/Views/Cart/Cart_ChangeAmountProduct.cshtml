@@ -1,0 +1,35 @@
+﻿@model List<NongSan.ViewModels.ItemCartViewModel>
+@{
+    ViewBag.Title = "Cart_ChangeProduct";
+}
+
+@foreach (var item in @Model)
+{
+    var url = "/chi-tiet-san-pham-" + item.sanpham.IDSanPham;
+    <tr>
+        <td class="product-thumbnail"><img src="~/assets/img/product/@item.sanpham.Hinh" alt=""></td>
+        <td class="product-name"><a href="@url">@item.sanpham.TenSanPham (500g)</a></td>
+        @*<td class="product-weight">
+                <select name="weight" class="form-control weight" idpro="@item.sanpham.IDSanPham" quantity="@item.SoLuong">
+                    <option value="300" @(item.TrongLuong == 300 ? "selected" : "")>300g</option>
+                    <option value="500" @(item.TrongLuong == 500 ? "selected" : "")>500g</option>
+                    <option value="1000" @(item.TrongLuong == 1000 ? "selected" : "")>1kg</option>
+                </select>
+            </td>*@
+        <td class="product-price"><span class="amount">@string.Format("{0:n0}", @item.Gia) VND</span></td>
+        <td class="product-quantity">
+            <div class="quickview_plus_minus quick_cart">
+                <div class="quickview_plus_minus_inner">
+                    <div class="cart-plus-minus cart_page">
+                        <div class="dec qtybutton">-</div>
+                        <input type="text" value="@item.SoLuong" idpro="@item.sanpham.IDSanPham" name="qtybutton" class="cart-plus-minus-box" weight="@item.TrongLuong">
+                        <div class="inc qtybutton">+</div>
+                    </div>
+                </div>
+            </div>
+        </td>
+
+        <td class="product-subtotal">@string.Format("{0:n0}", @item.Gia * @item.SoLuong) VND</td>
+        <td class="product-remove"><a href="#">X</a></td>
+    </tr>
+}

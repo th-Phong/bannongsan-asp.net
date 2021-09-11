@@ -1,0 +1,80 @@
+﻿@model List<NongSan.Models.SanPham>
+@{
+    ViewBag.Title = "ShopInIndex";
+
+    var alldanhmuc = (List<NongSan.Models.DanhMucSanPham>)ViewBag.DanhMuc;
+}
+
+<div class="Category_product_area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="Category_product_banner">
+                    <div class="Category_banner_inner">
+                        <a href="#"><img src="~/assets/img/banner/static2_img_home2.jpg" alt=""></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="shop_product_head shop__two d-flex justify-content-between mb-30">
+                    <div class="section_title space_2 text-left">
+                        <h3>All Products</h3>
+                    </div>
+                    @*<div class="home_shop_product text-right">
+                            <ul class="product-tab-list nav d-flex flex-wrap justify-content-end danhmuc">
+                                @foreach (var item in alldanhmuc)
+                                {
+                                    <li>
+                                        <a href="#" aria-selected="true" aria-controls="fresh" iddanhmuc="@item.IDDanhMuc">
+                                            @item.TenDanhMuc
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>*@
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active show fade" id="shop_index" role="tabpanel">
+                        <div class="row testTemp">
+                            <div class="category_product_active  owl-carousel">
+                                @foreach (var item in Model)
+                                {
+                                    var url = "/chi-tiet-san-pham-" + item.IDSanPham;
+                                    <div class="col-lg-2">
+                                        <div class="single__product">
+                                            <div class="single_product__inner">
+                                                <span class="new_badge">new</span>
+                                                <div class="product_img">
+                                                    <a href="#">
+                                                        <img src="~/assets/img/product/@item.Hinh" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="product__content text-center">
+                                                    <div class="produc_desc_info">
+                                                        <div class="product_title">
+                                                            <h4><a href="product-details.html">@item.TenSanPham</a></h4>
+                                                        </div>
+                                                        <div class="product_price">
+                                                            <p>@string.Format("{0:n0}", item.GiaKhuyenMai) VND</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product__hover">
+                                                        <ul>
+                                                            <li><a href="#" idpro=@item.IDSanPham quantity="1" weight="500" class="addcart"><i class="ion-android-cart"></i></a></li>
+                                                            <li><a class="cart-fore" href="#" data-toggle="modal" data-target="#my_modal" title="Quick View"><i class="ion-android-open"></i></a></li>
+                                                            <li><a href="@url"><i class="ion-clipboard"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

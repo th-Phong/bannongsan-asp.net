@@ -1,0 +1,42 @@
+﻿@model  IEnumerable<NongSan.Models.SanPham>
+@{
+    ViewBag.Title = "PhanTrang_ShopIndex";
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        var url = "/chi-tiet-san-pham-" + item.IDSanPham;
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+            <div class="single__product">
+                <div class="single_product__inner">
+                    <span class="new_badge">Organic</span>
+                    <span class="discount_price">sale</span>
+                    <div class="product_img">
+                        <a href="@url">
+                            <img src="~/assets/img/product/@item.Hinh" alt="">
+                        </a>
+                    </div>
+                    <div class="product__content text-center">
+                        <div class="produc_desc_info">
+                            <div class="product_title">
+                                <h4><a href="product-details.html">@item.TenSanPham</a></h4>
+                            </div>
+                            <div class="product_price">
+                                <p>@string.Format("{0:n0}", @item.GiaKhuyenMai) VND</p>
+                            </div>
+                        </div>
+                        <div class="product__hover">
+                            <ul>
+                                <li><a href="#" idpro=@item.IDSanPham quantity="1" weight="500" class="addcart"><i class="ion-android-cart"></i></a></li>
+                                <li><a class="cart-fore" href="#" data-toggle="modal" data-target="#my_modal" title="Quick View"><i class="ion-android-open"></i></a></li>
+
+                                <li><a href="@url"><i class="ion-clipboard"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

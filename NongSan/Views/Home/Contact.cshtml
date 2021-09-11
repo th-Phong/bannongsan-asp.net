@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+<!--breadcrumb area start-->
+<div class="breadcrumb_container">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="/">Home ></a>
+                        </li>
+                        <li>contact</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumb area end-->
+<!--contact area css satrt-->
+<div class="contact_area ptb-90">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-7">
+                <div class="contact_map_wrapper">
+                    <div class="contact_map mb-40">
+                        <!-- Contact Map Start -->
+                        <div id="contact-map"></div>
+                        <!-- Contact Map End -->
+                    </div>
+                    <div class="contact-message">
+                        <div class="contact_title">
+                            <h4>Contact Information</h4>
+                        </div>
+                        <form id="contact-form" method="post" action="#">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="contact_n">Name<span>*</span></label>
+                                    <input name="name" id="contact_n" type="text">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="contact_n2">Email<span>*</span></label>
+                                    <input name="email" id="contact_n2" type="email">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="contact_n3">Telephone</label>
+                                    <input name="phone" id="contact_n3" type="text">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="contact_n4">subject</label>
+                                    <input name="subject" id="contact_n4" type="text">
+                                </div>
+                                <div class="col-12">
+                                    <div class="contact-textarea">
+                                        <label>Comment<span>*</span></label>
+                                        <textarea name="message" class="form-control2" required=""></textarea>
+                                    </div>
+                                    <button type="submit"> Send Message </button>
+                                </div>
+                            </div>
+                            <p class="form-messege"></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-5">
+                <div class="contact_info_wrapper">
+                    <div class="contact_title">
+                        <h4>Location & Details</h4>
+                    </div>
+                    <div class="contact_info mb-15">
+                        <div class="contact_info_icone">
+                            <a href="#"><i class="icofont icofont-location-pin"></i></a>
+                        </div>
+                        <div class="contact_info_text">
+                            <p><span>Address:</span>  A15/57A - Bandit Tringi lAliquam <br> Vitae. New York</p>
+                        </div>
+                    </div>
+                    <div class="contact_info mb-15">
+                        <div class="contact_info_icone">
+                            <a href="#"><i class="icofont icofont-email"></i></a>
+                        </div>
+                        <div class="contact_info_text">
+                            <p><span>Email: </span>   Support@plazathemes.com </p>
+                        </div>
+                    </div>
+                    <div class="contact_info mb-15">
+                        <div class="contact_info_icone">
+                            <a href="#"><i class="icofont icofont-phone"></i></a>
+                        </div>
+                        <div class="contact_info_text">
+                            <p><span>Phone:</span>  (800) 0123 456 789 </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--contact area css end-->

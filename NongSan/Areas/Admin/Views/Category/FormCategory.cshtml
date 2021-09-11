@@ -1,0 +1,68 @@
+﻿@model IEnumerable<NongSan.Models.DanhMucSanPham>
+@{
+    ViewBag.Title = "FormCategory";
+}
+
+<!-- modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Danh Mục</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <form id="FormAddCategory" method="post">
+                <div class="modal-body">
+                    <span class="message" style="color: red;font-weight:300;"></span>
+                    <div class="form-group">
+                        <label for="DanhMucID">Danh Mục ID</label>
+                        <input type="text" class="form-control" id="IDDanhMuc" name="IDDanhMuc" placeholder="Auto" disabled="disabled" />
+                    </div>
+                    <div class="form-group">
+                        <label for="TenDanhMuc">Tên Danh Mục</label>
+                        <input type="text" class="form-control" id="TenDanhMuc" name="TenDanhMuc" placeholder="Tên Danh Mục" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="btnAdd">Add</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClose">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update();">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function Update() {
+        var dmObj = {
+            IDDanhMuc: $('#IDDanhMuc').val(),
+            TenDanhMuc: $('#TenDanhMuc').val(),
+        };
+        $.ajax({
+            url: "/Category/Update",
+            data: JSON.stringify(dmObj),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                if (response == 0) {
+                    $(".modal-bodydelete").text("Fix thành công");
+                }
+                else if (response == 1) {
+                    $(".modal-bodydelete").text("Danh mục này không tồn tại !");
+                }
+                else if (response == 2) {
+                    $(".modal-bodydelete").text("Có lỗi");
+                }
+                // hiển thị thông báo
+                $('#modalDelete').modal('show');
+                $('#myModal').modal('hide');
+                $('#IDDanhMuc').val("");
+                $('#TenDanhMuc').val("");
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+</script>

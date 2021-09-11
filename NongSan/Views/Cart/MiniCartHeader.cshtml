@@ -1,0 +1,62 @@
+﻿@model List<NongSan.ViewModels.ItemCartViewModel>
+@{
+    ViewBag.Title = "MiniCartHeader";
+}
+
+<div class="mini_cart_inner">
+    <div class="cart_icon">
+        <a href="/gio-hang">
+            <span class="cart_icon_inner">
+                <i class="ion-android-cart"></i>
+                <span class="cart_count">
+                    @Model.Count()
+                </span>
+            </span>
+            <span class="item_total">@string.Format("{0:n0}", @Model.Sum(x => x.SoLuong * x.Gia)) VND</span>
+        </a>
+    </div>
+    <!--Mini Cart Box-->
+    <div class="mini_cart_box cart_box_one">
+        @if (Session["order"] != null&& @Model.Sum(x => x.SoLuong)>0)
+        {
+            foreach (var item in @Model)
+            {
+                var url = "/chi-tiet-san-pham-" + item.sanpham.IDSanPham;
+                <div class="mini_cart_item" id="minicart_@item.sanpham.IDSanPham">
+                    <div class="mini_cart_img">
+                        <a href="@url">
+                            <img src="~/assets/img/product/@item.sanpham.Hinh" alt="">
+                            <span class="cart_count">@item.SoLuong</span>
+                        </a>
+                    </div>
+                    <div class="cart_info">
+                        <h5><a href="@url" class="detail_product_incart" idpro="@item.sanpham.IDSanPham">@item.sanpham.TenSanPham (500g)</a></h5>
+                        <span class="cart_price">@item.SoLuong  x  @string.Format("{0:n0}", @item.Gia) VND</span>
+                    </div>
+                    @*<div class="cart_remove">
+                            <a href="#" onclick="ConfirmDeleteMiniCart(@item.sanpham.IDSanPham)"><i class="zmdi zmdi-delete"></i></a>
+                        </div>*@
+                </div>
+            }
+
+            <div class="price_content">
+                <div class="cart-total-price">
+                    <span class="label">Total </span>
+                    <span class="value">@string.Format("{0:n0}", @Model.Sum(x => x.SoLuong * x.Gia)) VND</span>
+                </div>
+            </div>
+            <div class="min_cart_checkout">
+                <a href="/cart/checkout">Checkout</a>
+            </div>
+        }
+    </div>
+    @*hidden field for storing current productId*@
+    @*<input type="hidden" id="hiddenProductId" />*@
+    <!--Mini Cart Box End -->
+</div>
+@*<script>
+        var ConfirmDeleteMiniCart = function (ProductId) {
+            $("#hiddenProductId").val(ProductId);
+            $('#exampleModal').modal('show');
+        }
+    </script>*@

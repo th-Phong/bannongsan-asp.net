@@ -1,0 +1,110 @@
+﻿@model IEnumerable<NongSan.Models.DonHang>
+@{
+    ViewBag.Title = "TableOrder";
+}
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <h1 class="h3 mb-2 text-gray-800">Order</h1>
+
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">DataTables</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered product" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr style="text-align:center;">
+                                        <th>Mã đơn hàng</th>
+                                        <th>Tên người đặt</th>
+                                        <th>UserName</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Địa chỉ</th>
+                                        <th>Email</th>
+                                        <th>Ghi chú</th>
+                                        <th>Hình thức thanh toán</th>
+                                        <th>Trạng thái đơn hàng</th>
+                                        <th>Tổng tiền</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.IDDonHang</td>
+                                            <td>@item.ShipTenNguoiDat</td>
+                                            <td>@item.UserName</td>
+                                            <td>@item.ShipSoDienThoai</td>
+                                            <td>@item.ShipDiaChi</td>
+                                            <td>@item.ShipEmail</td>
+                                            <td>@item.ShipGhiChu</td>
+                                            <td>@item.HinhThucThanhToan</td>
+                                            <td>@item.TrangThaiDonHang</td>
+                                            <td>@string.Format("{0:n0}", @item.TongTien) VND</td>
+                                            <td style="text-align:center;">
+                                                <a style="margin:10px;" class="btn btn-primary btn-sm btn_FixOrder" data-id="@item.IDDonHang"><i class="fa fa-pen-fancy fa-lg"></i></a>                                              
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot style="text-align:center;">
+                                    <tr>
+                                        <th>Mã đơn hàng</th>
+                                        <th>Tên người đặt</th>
+                                        <th>UserName</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Địa chỉ</th>
+                                        <th>Email</th>
+                                        <th>Ghi chú</th>
+                                        <th>Hình thức thanh toán</th>
+                                        <th>Trạng thái đơn hàng</th>
+                                        <th>Tổng tiền</th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+    </div>
+    <!-- End of Content Wrapper -->
+</div>
+<!-- End of Page Wrapper -->
+@{Html.RenderAction("FormOrder", "Order");}
+<!-- Modal thông báo -->
+<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-bodydelete">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btnClose_modal" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

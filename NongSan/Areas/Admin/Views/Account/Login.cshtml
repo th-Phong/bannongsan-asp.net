@@ -1,0 +1,88 @@
+﻿@model NongSan.Models.TaiKhoan
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+    var totalpage = ViewBag.error;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="~/assets/img/favicon.png">
+    <title>OrganicFood - @ViewBag.Title</title>
+    @*@Styles.Render("~/Content/css")*@
+    <!-- all css here -->
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/animate.css">
+    <link rel="stylesheet" href="~/Content/jquery-ui.css">
+    <link rel="stylesheet" href="~/Content/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/chosen.min.css">
+    <link rel="stylesheet" href="~/Content/ionicons.min.css">
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="~/Content/meanmenu.min.css">
+    <link rel="stylesheet" href="~/Content/bundle.css">
+    <link rel="stylesheet" href="~/Content/style.css">
+    <link rel="stylesheet" href="~/Content/responsive.css">
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <!--breadcrumb area end-->
+    <!--login section start-->
+    <div class="page_login_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1">
+                    <div class="login_page_form">
+
+                        @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            {
+                                if (TempData["msg"] != null)
+                                {
+                                    @*<script type="text/javascript">
+                        alert('@TempData["msg"]');
+                    </script>*@
+                        <span class="message" style="color: red;font-weight:300;">@TempData["msg"]</span>
+                                }
+                            }
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="input_text">
+                                        @Html.LabelFor(m => m.UserName)
+                                        @Html.TextBoxFor(m => m.UserName, new {@required = "required" })
+                                        @*<label for="name">Username or email <span>*</span></label>
+                        <input id="name" type="text">*@
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="input_text">
+                                        @Html.LabelFor(m => m.Password)
+                                        @Html.PasswordFor(m => m.Password, new {@required = "required" })
+                                        @*<label for="password">Passwords <span>*</span></label>
+                        <input id="password" type="password">*@
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="login_submit">
+                                        <input class="inline" value="Login" name="Login" type="submit">
+                                        <label class="inline" for="rememberme">
+                                            <input id="rememberme" type="checkbox">
+                                            Remember me
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--login section end-->
+</body>
+</html>

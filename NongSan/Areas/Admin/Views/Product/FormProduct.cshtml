@@ -1,0 +1,138 @@
+﻿@model IEnumerable<NongSan.Models.SanPham>
+@{
+    ViewBag.Title = "FormProduct";
+    var alldanhmuc = (List<NongSan.Models.DanhMucSanPham>)ViewBag.DanhMuc;
+}
+<div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Sản Phẩm</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <form id="FormAddProduct" method="post">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="IDSanPham">Mã sản phẩm</label>
+                        <input type="text" class="form-control" id="IDSanPham" name="IDSanPham" placeholder="Auto" disabled="disabled" />
+                    </div>
+                    <div class="form-group">
+                        <label for="TenSanPham">Tên sản phẩm</label>
+                        <input type="text" class="form-control" id="TenSanPham" name="TenSanPham" placeholder="Tên sản phẩm" />
+                    </div>
+                    <div class="form-group">
+                        <label for="IDDanhMuc">Danh Mục</label>
+                        <select id="IDDanhMuc" class="form-control" name="IDDanhMuc">
+                            @foreach (var item in alldanhmuc)
+                            {
+                                <option value="@item.IDDanhMuc">@item.TenDanhMuc</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ImageFile">Hình</label>
+                        <input type="file" id="ImageFile" class="form-control-file" name="ImageFile" placeholder="Hình" accept="image/png, image/jpeg" />
+                        <img id="Hinh" src="" width="150" height="150" alt="Product's Image'" />
+                    </div>
+                    <div class="form-group">
+                        <label for="GioiThieu">Giới thiệu</label>
+                        <textarea id="GioiThieu" class="form-control" name="GioiThieu"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="DonGia">Đơn giá</label>
+                        <input type="text" class="form-control" id="DonGia" name="DonGia" placeholder="Đơn giá bán" />
+                    </div>
+                    <div class="form-group">
+                        <label for="GiaKhuyenMai">Gía Khuyến mãi</label>
+                        <input type="text" class="form-control" id="GiaKhuyenMai" name="GiaKhuyenMai" placeholder="Gía Khuyến mãi" />
+                    </div>
+                    <div class="form-group">
+                        <label for="MoTa">Mô tả</label>
+                        <textarea id="MoTa" class="form-control" name="MoTa"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="SoLuongTon">Số lượng tồn</label>
+                        <input type="text" class="form-control" id="SoLuongTon" name="SoLuongTon" placeholder="Số lượng tồn" />
+                    </div>
+                </div>
+                <span class="message" style="color: red;font-weight:300;"></span>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="btnAdd">Add</button>
+                    <button type="button" class="btn btn-primary" id="btnUpdate_product" style="display:none;" onclick="Update();">Update</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClose2">Close</button>
+                </div>
+                @*hidden field for image product*@
+                <input type="hidden" id="hiddenProductImage" />
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function Update() {
+        //var prObj = {
+        //    IDSanPham: $('#IDSanPham').val(),
+        //    IDDanhMuc: $('#IDDanhMuc').val(),
+        //    TenSanPham: $('#TenSanPham').val(),
+        //    DonGia: $('#DonGia').val(),
+        //    GiaKhuyenMai: $('#GiaKhuyenMai').val(),
+        //    GioiThieu: $('#GioiThieu').val(),
+
+        //    MoTa: $('#MoTa').val(),
+        //    SoLuongTon: $('#SoLuongTon').val(),
+        //    Hinh: $('#Hinh').val(),
+
+        //};
+        var formData = new FormData();
+        formData.append("IDSanPham", $("#IDSanPham").val());
+        formData.append("TenSanPham", $("#TenSanPham").val());
+        formData.append("IDDanhMuc", $("#IDDanhMuc").val());
+        formData.append("GioiThieu", $("#GioiThieu").val());
+        formData.append("MoTa", $("#MoTa").val());
+        formData.append("Hinh", $("#hiddenProductImage").val());
+        formData.append("DonGia", $("#DonGia").val());
+        formData.append("GiaKhuyenMai", $("#GiaKhuyenMai").val());
+        formData.append("SoLuongTon", $("#SoLuongTon").val());
+        //...
+        //var x = $('#fhanghoa').serializeArray()
+        var arr = $('#ImageFile');
+        formData.append('ImageFile', arr[0].files[0]);
+        $.ajax({
+            url: "/Product/Update",
+            data: formData,
+            type: "POST",
+            //contentType: "application/json;charset=utf-8",
+            //dataType: "json",
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response == 0) {
+                    $(".modal-bodydelete").text("Fix thành công");
+                    $('#IDSanPham').val("");
+                    $('#TenSanPham').val("");
+                    $('#IDDanhMuc').val("");
+                    $('#GioiThieu').val("");
+                    $('#MoTa').val("");
+                    $('#DonGia').val("");
+                    $('#GiaKhuyenMai').val("");
+                    $('#SoLuongTon').val("");
+                    $('#Hinh').attr('src',);
+                }
+                else if (response == 1) {
+                    $(".modal-bodydelete").text("Sản phẩm này không tồn tại !");
+                }
+                else if (response == 2) {
+                    $(".modal-bodydelete").text("Có lỗi");
+                }
+                // hiển thị thông báo
+                $('#modalDelete2').modal('show');
+                $('#myModal').modal('hide');
+
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+</script>

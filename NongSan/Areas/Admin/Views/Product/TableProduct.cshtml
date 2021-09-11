@@ -1,0 +1,128 @@
+﻿@model IEnumerable<NongSan.Models.SanPham>
+@{
+    ViewBag.Title = "TableProduct";
+    var alldanhmuc = (List<NongSan.Models.DanhMucSanPham>)ViewBag.DanhMuc;
+}
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <h1 class="h3 mb-2 text-gray-800">Products</h1>
+
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">DataTables</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="clearTextBox();">Thêm sản phẩm mới</button><br /><br />
+                            <table class="table table-bordered product" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr style="text-align:center;">
+                                        <th>Mã sản phẩm</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Danh mục</th>
+                                        <th>Hình</th>
+                                        <th>Giới thiệu</th>
+                                        <th>Đơn giá</th>
+                                        <th>Giá khuyến mãi</th>
+                                        <th>Mô tả</th>
+                                        <th>Số lượng</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td style="width: 50px;">@item.IDSanPham</td>
+                                            <td>@item.TenSanPham</td>
+                                            <td>@item.DanhMucSanPham.TenDanhMuc</td>
+                                            <td><img width="50" height="50" src="~/assets/img/product/@item.Hinh" alt=""></td>
+                                            <td style="height: auto; width: 300px;"><p style="width: 100%; white-space: pre-wrap; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 3; -webkit-box-orient: vertical; display: -webkit-box; ">@item.GioiThieu</p></td>
+                                            <td>@string.Format("{0:n0}", @item.DonGia) VND</td>
+                                            <td>@string.Format("{0:n0}", @item.GiaKhuyenMai) VND</td>
+                                            <td style="height: auto; width: 400px;"><p style="width: 100%; white-space: pre-wrap; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 3; -webkit-box-orient: vertical; display: -webkit-box; ">@item.MoTa</p></td>
+                                            <td>@item.SoLuongTon</td>
+                                            <td style="text-align:center;">
+                                                <a style="margin:10px;" class="btn btn-primary btn-sm btn_FixProduct" data-id="@item.IDSanPham"><i class="fa fa-pen-fancy fa-lg"></i></a>
+                                                <a style="margin:10px;" class="btn btn-danger btn-sm btn_DeleteProduct" data-id="@item.IDSanPham"><i class="fa fa-trash fa-lg"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot style="text-align:center;">
+                                    <tr>
+                                        <th>Mã sản phẩm</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Danh mục</th>
+                                        <th>Hình</th>
+                                        <th>Giới thiệu</th>
+                                        <th>Đơn giá</th>
+                                        <th>Giá khuyến mãi</th>
+                                        <th>Mô tả</th>
+                                        <th>Số lượng</th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+    </div>
+    <!-- End of Content Wrapper -->
+</div>
+<!-- End of Page Wrapper -->
+@{Html.RenderAction("FormProduct", "Product");}
+
+<script>
+    function clearTextBox() {
+        $('#IDSanPham').val("");
+        $('#TenSanPham').val("");
+        $('#IDDanhMuc').val("");
+        $('#Hinh').val("");
+        $('#GioiThieu').val("");
+        $('#MoTa').val("");
+        $('#DonGia').val("");
+        $('#GiaKhuyenMai').val("");
+        $('#SoLuongTon').val("");
+        document.getElementById('Hinh').removeAttribute('src');
+        $('#btnUpdate').hide();
+        $('#btnAdd').show();
+    }
+</script>
+
+<!-- Modal-->
+<div class="modal fade" id="modalDelete2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-bodydelete">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btnClose_modal" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

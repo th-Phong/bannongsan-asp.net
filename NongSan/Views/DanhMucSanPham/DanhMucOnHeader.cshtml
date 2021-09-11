@@ -1,0 +1,9 @@
+﻿@{
+    var DanhMucSanPham = (List<NongSan.Models.DanhMucSanPham>)ViewBag.DanhMuc;
+}
+
+@foreach (var item in DanhMucSanPham)
+{
+    var url = "/san-pham-danh-muc-" + @item.IDDanhMuc;
+    <li><a href="@url" data-danhmuc="@item.IDDanhMuc">@item.TenDanhMuc</a></li>
+}

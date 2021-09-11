@@ -1,0 +1,136 @@
+﻿@model List<NongSan.ViewModels.ItemCartViewModel>
+@{
+    ViewBag.Title = "CartIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="body_cart">
+    <!--breadcrumb area start-->
+
+    <div class="breadcrumb_container">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <nav>
+                        <ul>
+                            <li><a href="/">Home ></a></li>
+                            <li>Cart</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--breadcrumb area end-->
+
+    <div class="cart_main_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    @if (Session["order"] != null && @Model.Sum(x => x.SoLuong)>0)
+                    {
+                        <form action="#">
+                            <div class="table-content table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="img-thumbnail">Image</th>
+                                            <th class="product-name">Product</th>
+                                            @*<th class="product-quantity">Weight</th>*@
+                                            <th class="product-price">Price</th>
+                                            <th class="product-quantity">Quantity</th>
+                                            <th class="product-subtotal">Total</th>
+                                            <th class="product-remove">Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="cart_main_content">
+                                        @foreach (var item in @Model)
+                                        {
+                                            var url = "/chi-tiet-san-pham-" + item.sanpham.IDSanPham;
+                                            <tr id="idproduct_@item.sanpham.IDSanPham">
+                                                <td class="product-thumbnail"><img src="~/assets/img/product/@item.sanpham.Hinh" alt=""></td>
+                                                <td class="product-name"><a href="@url">@item.sanpham.TenSanPham (500g)</a></td>
+                                                @*<td class="product-weight">
+                                                        <select name="weight" class="form-control weight" idpro="@item.sanpham.IDSanPham" quantity="@item.SoLuong">
+                                                            <option value="300" @(item.TrongLuong == 300 ? "selected" : "")>300g</option>
+                                                            <option value="500" @(item.TrongLuong == 500 ? "selected" : "")>500g</option>
+                                                            <option value="1000" @(item.TrongLuong == 1000 ? "selected" : "")>1kg</option>
+                                                        </select>
+                                                    </td>*@
+                                                <td class="product-price-cart" id="product-price-cart @item.sanpham.IDSanPham" priceproduct="@item.Gia">@string.Format("{0:n0}", @item.Gia) VND</td>
+                                                <td class="product-quantity">
+                                                    <div class="quickview_plus_minus quick_cart">
+                                                        <div class="quickview_plus_minus_inner">
+                                                            <div class="cart-plus-minus cart_page">
+                                                                <div class="dec qtybutton">-</div>
+                                                                <input type="text" value="@item.SoLuong" idpro="@item.sanpham.IDSanPham" name="qtybutton" class="cart-plus-minus-box" weight="@item.TrongLuong">
+                                                                <div class="inc qtybutton">+</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+
+                                                <td class="product-subtotal" id="product_subtotal @item.sanpham.IDSanPham">@string.Format("{0:n0}", @item.Gia * @item.SoLuong) VND</td>
+                                                <td class="product-remove"><a href="#" onclick="ConfirmDelete(@item.sanpham.IDSanPham)">X</a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row table-responsive_bottom">
+                                <div class="col-lg-7 col-sm-7 col-md-7">
+                                    <div class="buttons-carts">
+                                        <input value="Update Cart" type="submit">
+                                        <a href="/shop">Continue Shopping</a>
+                                    </div>
+                                    <div class="buttons-carts coupon">
+                                        <h3>Coupon</h3>
+                                        <p>Enter your coupon code if you have one.</p>
+                                        <input placeholder="Coupon code" type="text" id="coupon_cart">
+                                        <input value="Apply Coupon" type="submit" id="apply_coupon">
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 col-sm-5 col-md-5">
+                                    <div class="cart_totals  text-right">
+                                        <h2>Cart Totals</h2>
+                                        <div class="cart-subtotal">
+                                            <span>Subtotal</span>
+                                            <div id="cart_subtotal"><span>@string.Format("{0:n0}", @Model.Sum(x => x.SoLuong * x.Gia)) VND</span></div>
+                                        </div>
+                                        <div class="cart-subtotal">
+                                            <span>Discount</span>
+                                            <div id="cart_discount"><span>0 VND</span></div>
+                                        </div>
+                                        <div class="order-total" style="font-size:24px;">
+                                            <span><strong>Total</strong> </span>
+                                            <div id="order_total"><span><strong>@string.Format("{0:n0}", @Model.Sum(x => x.SoLuong * x.Gia)) VND </strong> </span></div>
+                                        </div>
+                                        <div class="wc-proceed-to-checkout checkout" total_product="@Model.Sum(x => x.SoLuong)">
+                                            <a href="/cart/Checkout">Proceed to Checkout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    }
+                    else
+                    {
+                        <h3>Có vẻ bạn chưa chọn mặt hàng nào :))</h3>
+                        <div class="buttons-carts">
+                            <input value="Update Cart" type="submit">
+                            <a href="/shop">Continue Shopping</a>
+                        </div>
+                    }
+                    @*hidden field for storing current productId*@
+                    <input type="hidden" id="hiddenProductId" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var ConfirmDelete = function (ProductId) {
+        $("#hiddenProductId").val(ProductId);
+        $('#exampleModal').modal('show');
+    }
+</script>

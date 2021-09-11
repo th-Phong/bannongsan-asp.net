@@ -1,0 +1,63 @@
+﻿@model IEnumerable<NongSan.Models.DonHang>
+@{
+    ViewBag.Title = "FormOrder";
+}
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Đơn Hàng</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <form>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="IDDonHang">Mã Đơn Hàng</label>
+                        <input type="text" class="form-control" id="IDDonHang" placeholder="" disabled="disabled" />
+                    </div>
+                    <div class="form-group">
+                        <label for="ShipName">Tên Người Đặt</label>
+                        <input type="text" class="form-control" id="ShipTenNguoiDat" placeholder="Tên Người Đặt" />
+                    </div>
+                    <div class="form-group">
+                        <label for="UserName">Username</label>
+                        <input type="text" class="form-control" id="UserName" placeholder="Username" />
+                    </div>
+                    <div class="form-group">
+                        <label for="ShipSoDienThoai">Số Điện Thoại</label>
+                        <input type="number" class="form-control" id="ShipSoDienThoai" placeholder="Số Điện Thoại" />
+                    </div>
+                    <div class="form-group">
+                        <label for="ShipDiaChi">Địa chỉ Giao Hàng</label>
+                        <input type="text" class="form-control" id="ShipDiaChi" placeholder="Địa chỉ Giao Hàng" />
+                    </div>
+                    <div class="form-group">
+                        <label for="ShipEmail">Email</label>
+                        <input type="text" class="form-control" id="ShipEmail" placeholder="Email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="ShipGhiChu">Ghi chú</label>
+                        <textarea class="form-control" id="ShipGhiChu" placeholder="Ghi chú" />
+                    </div>
+                    <div class="form-group">
+                        <label for="ShipEmail">Hình thức thanh toán</label>
+                        <input type="text" class="form-control" id="ShipEmail" placeholder="Email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Status">Trạng Thái</label>
+                        <input type="checkbox" id="Status" placeholder="Status" />
+                    </div>
+                    <div class="form-group">
+                        <label for="TongTien">Tổng Tiền</label>
+                        <input type="number" class="form-control" id="TongTien" disabled placeholder="" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update();">Update</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
