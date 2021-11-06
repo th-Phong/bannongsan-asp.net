@@ -737,7 +737,7 @@
       - SHOPINDEX - SAN PHAM THEO DANH MUC-Chua phan trang
       ------------------------------*/
     $(document).on('click', '.shop_toggle li a', function (e) {
-        alert($(this).parent().attr("data-danhmuc"));
+       /* alert($(this).parent().attr("data-danhmuc"));*/
         $.ajax({
             url: "/SanPham/LoadAjax_SanPhamDanhMuc/",
             data: { id: $(this).parent().attr("data-danhmuc") },

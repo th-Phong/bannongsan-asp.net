@@ -53,9 +53,9 @@
                                                 @{ Html.RenderAction("DanhMucOnHeader", "DanhMucSanPham", new { area = "" });}
                                             </ul>
                                         </li>
-                                        <li>
-                                            <a href="#">Blog </a>
-                                        </li>
+                                        @*<li>
+            <a href="#">Blog </a>
+        </li>*@
 
                                         <li><a href="~/admin/account/login">Login</a></li>
                                     </ul>
@@ -73,9 +73,9 @@
                                         </li>
                                         <li><a href="/gioi-thieu">about us </a></li>
                                         <li><a href="/shop">shop</a>  </li>
-                                        <li>
-                                            <a href="#">Blog </a>
-                                        </li>
+                                        @*<li>
+            <a href="#">Blog </a>
+        </li>*@
 
                                         <li><a href="~/admin/account/login">Login</a></li>
                                     </ul>
@@ -83,15 +83,16 @@
                             </div>
                         </div>
                         <div class="header_right_info d-flex">
-                            <div class="search_box">
-                                <div class="search_inner">
-                                    <form action="#">
-                                        <input type="text" placeholder="Search our catalog">
-                                        <button type="submit"><i class="ion-ios-search"></i></button>
-                                    </form>
-                                </div>
-                            </div>
-
+                            @*
+        <div class="search_box">
+            <div class="search_inner">
+                <form action="#">
+                    <input type="text" placeholder="Search our catalog">
+                    <button type="submit"><i class="ion-ios-search"></i></button>
+                </form>
+            </div>
+        </div>
+                            *@
                             <!--Mini cart start-->
                             <div class="mini__cart">
                                 @{ Html.RenderAction("MiniCartHeader", "Cart", new { area = "" });}
@@ -118,8 +119,8 @@
                                         </div>
                                         <div class="user_info_top">
                                             <ul>
-                                                <li><a href="#">my account</a></li>
-                                                <li><a href="#">Checkout</a></li>
+                                                <li><a href="~/admin/account/login">my account</a></li>
+                                                @*<li><a href="~/cart/checkout">Checkout</a></li>*@
                                                 <li><a href="~/admin/account/login">Sign in</a></li>
                                             </ul>
                                         </div>
@@ -151,9 +152,9 @@
                                 <a href="#"><img src="~/assets/img/logo/logo_footer.png" alt=""></a>
                             </div>
                             <div class="footer_content">
-                                <p>Address: 160 Dao Tri Street, District 7, Ho Chi Minh City - VietNam.</p>
+                                <p>Address: Đào Trí, Quận 7, TP Hồ Chí Minh - Việt Nam.</p>
                                 <p>Phone: +(000) 800 456 789</p>
-                                <p>Email: Contact@posthemes.com</p>
+                                <p>Email: hongphong120300@gmail.com</p>
                             </div>
                             <div class="footer_social">
                                 <h4>Get in Touch:</h4>
@@ -171,6 +172,7 @@
                 <div class="col-lg-6 col-md-12 col-xs-12">
                     <div class="footer_menu_list d-flex justify-content-between">
                         <!--Single Footer-->
+                        
                         <div class="single_footer widget">
                             <div class="single_footer_widget_inner">
                                 <div class="footer_title">
@@ -178,11 +180,11 @@
                                 </div>
                                 <div class="footer_menu">
                                     <ul>
-                                        <li><a href="#">Prices drop</a></li>
-                                        <li><a href="#"> New products</a></li>
+                                        @*  <li><a href="#">Prices drop</a></li>*@
+                                        <li><a href="/shop"> New products</a></li>
                                         <li><a href="#"> Best sales</a></li>
-                                        <li><a href="#"> Contact us</a></li>
-                                        <li><a href="#"> My account</a></li>
+                                        @*<li><a href="#"> Contact us</a></li>*@
+                                        <li><a href="~/admin/account/login"> My account</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -196,110 +198,110 @@
                                 </div>
                                 <div class="footer_menu">
                                     <ul>
-                                        <li><a href="#">Sitemap</a></li>
-                                        <li><a href="#"> Stores</a></li>
+                                        @* <li><a href="#">Sitemap</a></li>*@
+                                        <li><a href="/shop"> Stores</a></li>
                                         <li><a href="~/admin/account/login"> Login</a></li>
-                                        <li><a href="#"> Contact us</a></li>
-                                        <li><a href="#"> My account</a></li>
+                                        @*<li><a href="#"> Contact us</a></li>*@
+                                        <li><a href="~/admin/account/login"> My account</a></li>
                                     </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <!--Single Footer end-->
-                        <!--Single footer start-->
-                        <div class="single_footer widget">
-                            <div class="single_footer_widget_inner">
-                                <div class="footer_title">
-                                    <h2> Your account </h2>
-                                </div>
-                                <div class="footer_menu">
-                                    <ul>
-                                        <li><a href="#">Personal info</a></li>
-                                        <li><a href="#"> Orders</a></li>
-                                        <li><a href="~/admin/account/login"> Login</a></li>
-                                        <li><a href="#"> Credit slips</a></li>
-                                        <li><a href="#"> Addresses</a></li>
-                                    </ul>
+                            <!--Single Footer end-->
+                            <!--Single footer start-->
+                            <div class="single_footer widget">
+                                <div class="single_footer_widget_inner">
+                                    <div class="footer_title">
+                                        <h2> Your account </h2>
+                                    </div>
+                                    <div class="footer_menu">
+                                        <ul>
+                                            @* <li><a href="#">Personal info</a></li>*@
+                                            <li><a href="/gio-hang"> Orders</a></li>
+                                            <li><a href="~/admin/account/login"> Login</a></li>
+                                            @*   <li><a href="#"> Credit slips</a></li>
+        <li><a href="#"> Addresses</a></li>*@
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
+                            <!--Single Footer end-->
                         </div>
-                        <!--Single Footer end-->
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-12 col-xs-12">
-                    <div class="footer_title">
-                        <h2> Join Our Newsletter Now </h2>
-                    </div>
-                    <div class="footer_news_letter">
-                        <p>Get E-mail updates about our latest shop and special offers.</p>
-                        <div class="newsletter_form">
-                            <form action="#">
-                                <input type="email" required placeholder="Your Email Address">
-                                <input type="submit" value="Subscribe">
-                            </form>
+                    <div class="col-lg-3 col-md-12 col-xs-12">
+                        <div class="footer_title">
+                            <h2> Join Our Newsletter Now </h2>
+                        </div>
+                        <div class="footer_news_letter">
+                            <p>Get E-mail updates about our latest shop and special offers.</p>
+                            <div class="newsletter_form">
+                                <form action="#">
+                                    <input type="email" required placeholder="Your Email Address">
+                                    <input type="submit" value="Subscribe">
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="copyright">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-xs-12">
-                        <div class="copyright_text">
-                            <p>Copyright 2021 <a href="#">Organicfood</a>. All Rights Reserved</p>
+            <div class="copyright">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="copyright_text">
+                                <p>Copyright 2021 <a href="#">Organicfood</a>. All Rights Reserved</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-xs-12">
-                        <div class="footer_mastercard text-right">
-                            <a href="#"><img src="~/assets/img/brand/payment.png" alt=""></a>
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="footer_mastercard text-right">
+                                <a href="#"><img src="~/assets/img/brand/payment.png" alt=""></a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
 
-    <!-- footer end -->
-    <!-- Modal delete cart-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Do you want to remove this product from the cart?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="agreedelete_incart">Delete</button>
+        <!-- footer end -->
+        <!-- Modal delete cart-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Do you want to remove this product from the cart?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="agreedelete_incart">Delete</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    @*@Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")*@
-    <!-- all js here -->
-    <script src="~/Scripts/jquery-1.12.0.min.js"></script>
-    <script src="~/Scripts/popper.js"></script>
-    <script src="~/Scripts/jquery-ui.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/jquery.meanmenu.min.js"></script>
-    <script src="~/Scripts/isotope.pkgd.min.js"></script>
-    <script src="~/Scripts/imagesloaded.pkgd.min.js"></script>
-    <script src="~/Scripts/jquery.counterup.min.js"></script>
-    <script src="~/Scripts/waypoints.min.js"></script>
-    <script src="~/Scripts/ajax-mail.js"></script>
-    <script src="~/Scripts/owl.carousel.min.js"></script>
-    <script src="~/Scripts/plugins.js"></script>
-    <script src="~/Scripts/main.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlZPf84AAVt8_FFN7rwQY5nPgB02SlTKs"></script>
-    <script src="~/Scripts/map.js"></script>
-    @RenderSection("scripts", required: false)
+        @*@Scripts.Render("~/bundles/jquery")
+                                        @Scripts.Render("~/bundles/bootstrap")*@
+                                        <!-- all js here -->
+                                        <script src="~/Scripts/jquery-1.12.0.min.js"></script>
+                                        <script src="~/Scripts/popper.js"></script>
+                                        <script src="~/Scripts/jquery-ui.js"></script>
+                                        <script src="~/Scripts/bootstrap.min.js"></script>
+                                        <script src="~/Scripts/jquery.meanmenu.min.js"></script>
+                                        <script src="~/Scripts/isotope.pkgd.min.js"></script>
+                                        <script src="~/Scripts/imagesloaded.pkgd.min.js"></script>
+                                        <script src="~/Scripts/jquery.counterup.min.js"></script>
+                                        <script src="~/Scripts/waypoints.min.js"></script>
+                                        <script src="~/Scripts/ajax-mail.js"></script>
+                                        <script src="~/Scripts/owl.carousel.min.js"></script>
+                                        <script src="~/Scripts/plugins.js"></script>
+                                        <script src="~/Scripts/main.js"></script>
+                                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlZPf84AAVt8_FFN7rwQY5nPgB02SlTKs"></script>
+                                        <script src="~/Scripts/map.js"></script>
+                                        @RenderSection("scripts", required: false)
 </body>
 </html>

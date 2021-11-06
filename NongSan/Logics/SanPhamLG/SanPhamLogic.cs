@@ -21,6 +21,7 @@ namespace NongSan.Logics.SanPhamLG
             }
             return list;
         }
+
         public List<SanPham> LoadAllSanPham2()
         {
             List<SanPham> list = new List<SanPham>();
